@@ -90,7 +90,7 @@ The last filter we will pass our signal through before running the peak detectio
 ![MWI](https://github.com/MilosRasic98/OpenHRStrap/blob/main/Pictures/Figures/Fig8_MWIECG.png)
 
 ##### INT Peaks
-Running the peak detection algorithm on a signal with not too much noise, we will usually grab all of the R peaks, some T waves and a few noise peaks. Example of that below.
+Running the peak detection algorithm on a signal with not too much noise, we will usually grab all of the R peaks, some T waves, and a few noise peaks. Example of that below.
 
 ![INT Peaks](https://github.com/MilosRasic98/OpenHRStrap/blob/main/Pictures/Figures/Fig9_IntPeaks.png)
 
@@ -106,18 +106,27 @@ Since this was pre-recorded data, all of the filters and algorithms have been ap
 
 ![FILT Detection](https://github.com/MilosRasic98/OpenHRStrap/blob/main/Pictures/Figures/Fig14_Filt_FullPT.png)
 
-In the two figures below, you can see the results from the whole dataset. It worked rather nicely! I can see one missed R peak on 80+ seconds, see if you can spot it as well! The peaks weren't detected in the first 10 seconds of the algorithm, since that part of the signal was used for initlizaing the running parameters!
+In the two figures below, you can see the results from the whole dataset. It worked rather nicely! I can see one missed R peak on 80+ seconds, see if you can spot it as well! The peaks weren't detected in the first 10 seconds of the algorithm, since that part of the signal was used for initializing the running parameters!
 
 ![INT Detection](https://github.com/MilosRasic98/OpenHRStrap/blob/main/Pictures/Figures/peak_det1.png)
 
 ![FILT Detection](https://github.com/MilosRasic98/OpenHRStrap/blob/main/Pictures/Figures/peak_det2.png)
 
+### Strava Data
+This section will focus on the real-world testing of this device. This is where the V1 ran into some issues. The test was conducted by doing a 5K run with the chest strap and while wearing a smart watch with a PPG sensor on the arm as a control device. Smartwatches with PPG sensors are notorious for not being as accurate as ECG chest straps for running, but I still needed a reference device for the tests. I run long enough to approximately know whether the pulse reading is in the ball park, and on this case, there weren't any issues with the smart watch. The data that you can see below has been downloaded from Strava. If you log into Strava on their website and go to your activities, you can download the activity file and analyse it using Python! Code for that is also available in this repo. The two figures below show the data recorded by the smartwatch and by our DIY device.
 
+![SmartWatch Data](https://github.com/MilosRasic98/OpenHRStrap/blob/main/Pictures/Strava%20Data/Fig1_Strava_Smartwatch.png)
 
+![DIY Device Data](https://github.com/MilosRasic98/OpenHRStrap/blob/main/Pictures/Strava%20Data/Fig2_Strava_ESP32HR.png)
 
+The Smartwatch PPG signal is heavily filtered and is not realistic in that sense, but the measurement from our DIY device should follow the same trends as the PPG signal, and the values should be in the ballpark. If we overlay the signals one on top of the other by using the timestamps to align them, we can more easily compare them, this is shown in the figure below.
 
+![Comparisson](https://github.com/MilosRasic98/OpenHRStrap/blob/main/Pictures/Strava%20Data/Fig3_Strava_Comparisson.png)
 
+We can see that at the very start, as I started my run, both devices really matched nicely one another, bubt as my heartrate went up, so did the gap between the signals... If we take a look futher down the signal, we can see that as I tried changing my tempo during the run, the signals would sometimes match rather nicely when my heart rate would go down, but it was also way off in some other cases. It is also clear that, for the most part, the heart rate recorded by our DIY device was lower than the smartwatch. Since I didn't have proper data logging to see how the signal itself looked and what the algorithm did, it's hard to say what the main reason was for this. In the figures below, you can see segments of the signal where they were close together and when they were close together and then split up.
 
+![comp1](https://github.com/MilosRasic98/OpenHRStrap/blob/main/Pictures/Strava%20Data/Fig4_Strava_GoodSegment.png)
 
+![comp2](https://github.com/MilosRasic98/OpenHRStrap/blob/main/Pictures/Strava%20Data/Fig5_Strava_BadSegmentpng.png)
 
-
+The current plan for this project is to design a PCB around a new AFE IC and add datalogging capabilities. This will greatly increase the troubleshooting with real world testing and tuning the algorithm and hardware so that it is reliabble as an off-the-shelf device while keeping the whole thing completely open-source.
