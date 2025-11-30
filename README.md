@@ -1,4 +1,10 @@
 # OpenHRStrap
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Status](https://img.shields.io/badge/Status-Prototype-orange)
+![Platform](https://img.shields.io/badge/Platform-ESP32-blue)
+![Language-Python](https://img.shields.io/badge/Language-Python-blue)
+![Language-C++](https://img.shields.io/badge/Language-C++-blue)
+
 OpenHRStrap is an open-source DIY chest-strap heart-rate tracker built around the ESP32. It measures real biosignals through electrodes, filters the signal, and applies the Pan–Tompkins algorithm to detect R-peaks and compute heart rate in real time. The Pan-Tompkins algorithm has been implemented in Python to follow the filter chain as originally described in the paper. The device is programmed so that it is detected as an off-the-shelf BLE device and is recognized by apps like Strava! Below, I will also show how you can extract data from your Strava and analyze it using Python!
 
 ![First Version of OpenHRStrap](https://github.com/MilosRasic98/OpenHRStrap/blob/main/Pictures/CroppedFinishedProject.png)
@@ -8,6 +14,16 @@ Latest Blog on the project: [element14 Running Tracker Blog](https://community.e
 Link to the latest video on the project: [Running Tracker Video Part 1](https://www.youtube.com/watch?v=Z1Dts_NHXyQ)
 
 Original Pan-Tompkins Paper: [A Real-Time QRS Detection Algorithm](https://www.robots.ox.ac.uk/~gari/teaching/cdt/A3/readings/ECG/Pan+Tompkins.pdf)
+
+## Table of Contents
+
+- [Project Updates](#project-updates)
+- [V1 of the Project](#v1-of-the-project)
+- [Pan–Tompkins Algorithm](#pan\-tompkins-algorithm)
+- [Data Filtering Example](#data-filtering-example)
+- [Detection Example](#detection-example)
+- [Strava Data](#strava-data)
+- [Disclaimer](#disclaimer)
 
 ## Project Updates
 
@@ -119,7 +135,7 @@ This section will focus on the real-world testing of this device. This is where 
 
 ![DIY Device Data](https://github.com/MilosRasic98/OpenHRStrap/blob/main/Pictures/Strava%20Data/Fig2_Strava_ESP32HR.png)
 
-The Smartwatch PPG signal is heavily filtered and is not realistic in that sense, but the measurement from our DIY device should follow the same trends as the PPG signal, and the values should be in the ballpark. If we overlay the signals one on top of the other by using the timestamps to align them, we can more easily compare them, this is shown in the figure below.
+The Smartwatch PPG signal is heavily filtered and is not realistic in that sense, but the measurement from our DIY device should follow the same trends as the PPG signal, and the values should be in the ballpark. If we overlay the signals one on top of the other by using the timestamps to align them, we can more easily compare them. This is shown in the figure below.
 
 ![Comparisson](https://github.com/MilosRasic98/OpenHRStrap/blob/main/Pictures/Strava%20Data/Fig3_Strava_Comparisson.png)
 
@@ -130,3 +146,11 @@ We can see that at the very start, as I started my run, both devices really matc
 ![comp2](https://github.com/MilosRasic98/OpenHRStrap/blob/main/Pictures/Strava%20Data/Fig5_Strava_BadSegmentpng.png)
 
 The current plan for this project is to design a PCB around a new AFE IC and add datalogging capabilities. This will greatly increase the troubleshooting with real world testing and tuning the algorithm and hardware so that it is reliabble as an off-the-shelf device while keeping the whole thing completely open-source.
+
+## Disclaimer
+
+This project is intended for **educational, experimental, and hobby use only**.  
+OpenHRStrap is **not a medical device**, is **not certified**, and must not be used for diagnosis, monitoring of medical conditions, or any health-critical applications.  
+
+All hardware, firmware, and software are provided **“as-is” without warranty**, and the author assumes **no responsibility** for any damages, injuries, or losses resulting from the use of this project.
+
